@@ -1,16 +1,13 @@
 name: "Ansible Config"
 
-
 on:
   workflow_run:
     workflows: ["Terraform Apply"]
     types:
       - completed
-
-    
-  
+ 
 jobs:
-  terraform:
+  Ansible:
     name: "Configure new EC2 instance"
     runs-on: ubuntu-latest
     permissions:
@@ -28,4 +25,23 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: aws-ec2-pub-ip
+          path: ./ansible
 
+      - name: Setup SSH
+        run: |
+          echo "${{ secrets.MYAWSKEY_PRIVATE }}" > private_key.pem
+          chmod 600 private_key.pem
+
+      - name: install Ansible
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook \
+            -i aws-ec2-pub-ip/aws-ec2-pub-ip.txt \
+            -u ubuntu \
+            --private-key private_key.pem \
+            playbook.yaml
