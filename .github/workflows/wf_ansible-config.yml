@@ -8,6 +8,7 @@ on:
  
 jobs:
   Ansible:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: "Configure new EC2 instance"
     runs-on: ubuntu-latest
     permissions:
