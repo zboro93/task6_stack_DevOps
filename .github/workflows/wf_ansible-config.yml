@@ -1,1 +1,31 @@
+name: "Ansible Config"
+
+
+on:
+  workflow_run:
+    workflows: ["Terraform Apply"]
+    types:
+      - completed
+
+    
+  
+jobs:
+  terraform:
+    name: "Configure new EC2 instance"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./ansible
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+       
+      - name: Download Public IP from artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: aws-ec2-pub-ip
 
