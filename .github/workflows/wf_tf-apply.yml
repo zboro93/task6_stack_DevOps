@@ -47,9 +47,15 @@ jobs:
       - name: terraform output
         id: output
         run: terraform output
+      
+      - run: mkdir -p artifact
 
+      - name: Save Public IP
+        run: |
+          terraform output -raw ubuntu_public_ip > artifact/aws-ec2-pub-ip.txt
+          
       - name: Upload Public IP do artifacts
         uses: actions/upload-artifact@v4
         with:
           name: aws-ec2-pub-ip
-          path: ${{ github.workspace }}/artifact/aws-ec2-pub-ip.txt
+          path: artifact/aws-ec2-pub-ip.txt
