@@ -54,7 +54,7 @@ jobs:
       - name: Run Ansible Playbook
         run: |
           ansible-playbook \
-            -i ansible/aws-ec2-pub-ip/aws-ec2-pub-ip.txt, \
+            -i aws-ec2-pub-ip.txt, \
             -u ubuntu \
-            --private-key private_key.pem \
-            ansible/playbook.yml
+            --private-key ../private_key.pem \
+            playbook.yml
