@@ -14,24 +14,17 @@
   tasks:
     - name: 1st task
       apt:
-        update_cache: yes
-      notify: CacheUpdated
-
-    - name: 2nd task
-      apt:
+        update_cache: true
         upgrade: dist
+        autoremove: true
       notify: AptUpgrade
 
 #    - name: 3rd task
   # Handlers: the list of handlers that are executed as a notify key from a task
   handlers:
-    - name: CacheUpdated
-      debug:
-        msg: Cache has been updated
-
     - name: AptUpgrade
       debug:
-        msg: OS Upgraded
+        msg: "Patching completed"
 
   # Roles: list of roles to be imported into the play
 
