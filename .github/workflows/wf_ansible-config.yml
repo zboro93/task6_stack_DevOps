@@ -13,6 +13,7 @@ jobs:
     name: "Configure new EC2 instance"
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
     defaults:
       run:
