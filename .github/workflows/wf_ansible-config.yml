@@ -52,6 +52,7 @@ jobs:
           ls -R .
 
       - name: Run Ansible Playbook
+        working-directory: ./ansible
         run: |
           ansible-playbook \
             -i aws-ec2-pub-ip.txt, \
