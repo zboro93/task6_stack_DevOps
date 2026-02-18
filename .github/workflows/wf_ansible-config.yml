@@ -43,6 +43,14 @@ jobs:
           sudo apt update
           sudo apt install -y ansible
 
+      - name: Debug filesystem
+        run: |
+          echo "PWD:"
+          pwd
+          echo
+          echo "TREE . :"
+          ls -R .
+
       - name: Run Ansible Playbook
         run: |
           ansible-playbook \
