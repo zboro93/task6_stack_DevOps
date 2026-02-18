@@ -5,6 +5,7 @@
 # of plays, with each play being a dictionary
 - name: Initial config for deployed VM
   gather_facts: false
+  become: true
   # Hosts: where our play will run and options it will run with
   hosts: all
   # Vars: variables that will apply to the play, on all target systems
