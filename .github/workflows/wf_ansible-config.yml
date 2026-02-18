@@ -44,4 +44,4 @@ jobs:
           ansible-playbook \
             -u ubuntu \
             --private-key private_key.pem \
-            playbook.yaml
+            playbook.yml
