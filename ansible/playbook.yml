@@ -15,7 +15,7 @@
     - name: 1st task
       apt:
         update_cache: yes
-      notify: ChacheUpdated
+      notify: CacheUpdated
 
     - name: 2nd task
       apt:
@@ -27,7 +27,7 @@
   handlers:
     - name: CacheUpdated
       debug:
-        msg: Cachce has been updated
+        msg: Cache has been updated
 
     - name: AptUpgrade
       debug:
