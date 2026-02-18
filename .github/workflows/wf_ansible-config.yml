@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
        
       - name: Download Public IP from artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: aws-ec2-pub-ip
           path: ./ansible
