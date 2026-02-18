@@ -29,7 +29,9 @@ jobs:
         with:
           name: aws-ec2-pub-ip
           path: ./ansible
-
+          repository: ${{ github.event.workflow_run.repository.full_name }}
+          run-id: ${{ github.event.workflow_run.id }}
+          
       - name: Setup SSH
         run: |
           echo "${{ secrets.MYAWSKEY_PRIVATE }}" > private_key.pem
