@@ -20,10 +20,6 @@ jobs:
         working-directory: ./ansible
         
     steps:
-
-      - name: Debug workflow_run payload
-        run: echo '${{ toJson(github.event.workflow_run) }}'
-
       - name: Checkout
         uses: actions/checkout@v4
        
