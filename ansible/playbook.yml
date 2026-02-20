@@ -4,7 +4,7 @@
 # The minus in YAML this indicates a list item.  The playbook contains a list
 # of plays, with each play being a dictionary
 - name: Initial config for deployed VM
-  gather_facts: false
+  gather_facts: true
   become: true
   # Hosts: where our play will run and options it will run with
   hosts: all
@@ -20,15 +20,75 @@
         autoremove: true
       notify: AptUpgrade
 
-    - name: install docker
+    - name: Setup Docker repository
+      shell: |
+        apt install -y ca-certificates curl
+        install -m 0755 -d /etc/apt/keyrings
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        chmod a+r /etc/apt/keyrings/docker.asc
+        
+        tee /etc/apt/sources.list.d/docker.sources <<EOF
+        Types: deb
+        URIs: https://download.docker.com/linux/ubuntu
+        Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+        Components: stable
+        Signed-By: /etc/apt/keyrings/docker.asc
+        EOF
+        apt update
+      notify: SetupDockerRepo
+        
+    - name: Install Docker  
+      apt:
+        name: 
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+        update_cache: true
+      notify: DockerInstall
+
+    - name: Start docker
+      service: 
+        name: docker
+        state: started
+        enabled: true
+      notify: DockerStart
+
+    - name: Start container
+      community.docker.docker_container:
+        name: nato-container
+        image: zboromir/nato:latest
+        published_ports: 
+          - "80:80"
+        cleanup: true
+        detach: true
+      notify: ContrainerStart
+        
+        
     
-#    - name: 3rd task
   # Handlers: the list of handlers that are executed as a notify key from a task
   handlers:
     - name: AptUpgrade
       debug:
         msg: "Patching completed"
 
+    - name: SetupDockerRepo
+      debug:
+        msg: "Docker Repo setup"
+        
+     - name: DockerInstall
+      debug:
+        msg: "Docker installed"       
+        
+     - name: DockerStart
+      debug:
+        msg: "Docker Started"  
+
+     - name: ContrainerStart
+      debug:
+        msg: "Contrainer Started"  
   # Roles: list of roles to be imported into the play
 
 # Three dots indicate the end of a YAML document
