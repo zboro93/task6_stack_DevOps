@@ -59,7 +59,7 @@
     - name: Start container
       community.docker.docker_container:
         name: nato-container
-        image: zboromir/nato:latest
+        image: zboromir/nato:v3
         published_ports: 
           - "80:80"
         cleanup: true
