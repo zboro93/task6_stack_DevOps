@@ -78,15 +78,15 @@
       debug:
         msg: "Docker Repo setup"
         
-     - name: DockerInstall
+    - name: DockerInstall
       debug:
         msg: "Docker installed"       
         
-     - name: DockerStart
+    - name: DockerStart
       debug:
         msg: "Docker Started"  
 
-     - name: ContrainerStart
+    - name: ContrainerStart
       debug:
         msg: "Contrainer Started"  
   # Roles: list of roles to be imported into the play
