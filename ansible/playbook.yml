@@ -13,13 +13,15 @@
   # Tasks: the list of tasks that will be executed within the play, this section
   #       can also be used for pre and post tasks
   tasks:
-    - name: 1st task
+    - name: Patching
       apt:
         update_cache: true
         upgrade: dist
         autoremove: true
       notify: AptUpgrade
 
+    - name: install docker
+    
 #    - name: 3rd task
   # Handlers: the list of handlers that are executed as a notify key from a task
   handlers:
