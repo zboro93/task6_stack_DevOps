@@ -1,5 +1,4 @@
-## nginx_site
-task6 - Nato phonetic alphabet converter as a DevOps Stack project.
+## task6 - Nato phonetic alphabet converter as a DevOps Stack project.
 ---
 
 **About**
