@@ -1,3 +1,3 @@
 dodać environment,
-main protected
+main protected 
 na pull request do branch, wtedy execute
