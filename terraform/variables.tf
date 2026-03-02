@@ -13,3 +13,7 @@ variable "availability_zone" {
   type        = string
 }
 
+variable "env" {
+  description = "environment"
+  type        = string
+}
