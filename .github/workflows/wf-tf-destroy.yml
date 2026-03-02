@@ -32,6 +32,8 @@ jobs:
       run:
         shell: bash
         working-directory: ./terraform
+    env:
+      TARGET_ENV: ${{ github.event.inputs.environment }}
         
     steps:
       - name: Checkout
