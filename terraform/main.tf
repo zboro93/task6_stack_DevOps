@@ -45,8 +45,8 @@ resource "aws_internet_gateway" "internet_gateway" {
 
 resource "aws_subnet" "public_subnet_1" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "eu-central-1a"
+  cidr_block        = var.cidr_block
+  availability_zone = var.availability_zone
   tags = {
     build = "Terraform"
   }
