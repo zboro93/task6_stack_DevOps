@@ -21,6 +21,8 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = var.env
+      Owner = "Zboro"
+      task = DevOps Stack 6
     }
   }
 }
