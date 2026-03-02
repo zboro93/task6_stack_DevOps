@@ -56,15 +56,26 @@
         enabled: true
       notify: DockerStart
 
-    - name: Start container
-      community.docker.docker_container:
-        name: nato-container
-        image: zboromir/nato:v3
-        published_ports: 
-          - "80:80"
-        cleanup: true
-        detach: true
-      notify: ContrainerStart
+    - name: Install MiniKube
+      run: |
+        curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+        sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+      notify: InstallMiniKube
+      
+    - name: Start MiniKube
+      run: |
+        minikube start
+      notify: StartMiniKube   
+      
+#    - name: Start container
+#      community.docker.docker_container:
+#        name: nato-container
+#        image: zboromir/nato:v3
+#        published_ports: 
+#          - "80:80"
+#        cleanup: true
+#        detach: true
+#      notify: ContrainerStart
         
         
     
@@ -89,6 +100,14 @@
     - name: ContrainerStart
       debug:
         msg: "Contrainer Started"  
+ 
+    - name: InstallMiniKube
+      debug:
+        msg: "Minikube Installed"  
+        
+    - name: StartMiniKube 
+      debug:
+        msg: "Minikube Started"  
   # Roles: list of roles to be imported into the play
 
 # Three dots indicate the end of a YAML document
