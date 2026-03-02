@@ -64,7 +64,7 @@
       
     - name: Start MiniKube
       shell: |
-        minikube start
+        sudo minikube start --driver=docker --force
       notify: StartMiniKube   
       
 #    - name: Start container
