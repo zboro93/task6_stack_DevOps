@@ -22,7 +22,7 @@ provider "aws" {
     tags = {
       Environment = var.env
       Owner = "Zboro"
-      task = DevOps Stack 6
+      task = "DevOps Stack 6"
     }
   }
 }
