@@ -1,3 +1,7 @@
+to do: 
+02.03 - Kubernetes na ubuntu z imagem
+
+
 ## task6 - Nato phonetic alphabet converter as a DevOps Stack project.
 ---
 
