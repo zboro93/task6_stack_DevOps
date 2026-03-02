@@ -1,4 +1,3 @@
-
 backend "s3" {
   bucket         = "zboro93-tfstate-bucket"
   key            = "envs/dev/terraform.tfstate"
