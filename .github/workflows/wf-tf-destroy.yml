@@ -50,7 +50,7 @@ jobs:
 
       - name: Terraform destroy
         id: destory
-        run: terraform destroy -auto-approve -input=false
+        run: terraform destroy -auto-approve -input=false -var-file="envs/${TARGET_ENV}.tfvars"
         
       - name: Log confirmation
         run: echo "Destroy confirmed by ${{ github.actor }}"
