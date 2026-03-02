@@ -61,7 +61,7 @@ jobs:
       
       - name: terraform apply
         id: apply
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var-file="envs/${TARGET_ENV}.tfvars"
 
       - name: terraform output
         id: output
