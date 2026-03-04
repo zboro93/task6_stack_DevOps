@@ -36,6 +36,15 @@
         EOF
         apt update
       notify: SetupDockerRepo
+
+    - name: Install Python dependencies for Kubernetes
+      become: yes
+      pip:
+        name:
+          - kubernetes
+          - pyyaml
+        executable: pip3
+      
         
     - name: Install Docker  
       apt:
