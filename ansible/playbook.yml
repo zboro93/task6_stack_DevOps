@@ -38,7 +38,7 @@
       notify: SetupDockerRepo
 
 
-    - name: Install python3 and pip3- name: Install python:
+    - name: Install python3 and pip3
         name:
           - python3
           - python3-pip
