@@ -66,6 +66,27 @@
       shell: |
         sudo minikube start --driver=docker --force
       notify: StartMiniKube   
+
+    - name: Install kubectl
+      command: >
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s 
+        https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+      args:
+        creates: /usr/local/bin/kubectl
+
+    - name: Install kubectl binary
+      copy:
+        src: kubectl
+        dest: /usr/local/bin/kubectl
+        mode: "0755"
+
+    - name: Deploy NATO app
+      kubernetes.core.k8s:
+        kubeconfig: "/root/.kube/config"
+        state: present
+        src: "{{ item }}"
+      loop: "{{ lookup('fileglob', '../k8s/*.yaml', wantlist=True) }}"
+
       
 #    - name: Start container
 #      community.docker.docker_container:
