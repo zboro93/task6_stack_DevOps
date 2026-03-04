@@ -73,12 +73,14 @@
         https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
       args:
         creates: /usr/local/bin/kubectl
+      notify: InstallKubectl
 
     - name: Install kubectl binary
       copy:
         src: kubectl
         dest: /usr/local/bin/kubectl
         mode: "0755"
+      notify: ConfigKubectl
 
     - name: Deploy NATO app
       kubernetes.core.k8s:
@@ -86,6 +88,7 @@
         state: present
         src: "{{ item }}"
       loop: "{{ lookup('fileglob', '../k8s/*.yaml', wantlist=True) }}"
+      notify: DeployApp 
 
       
 #    - name: Start container
@@ -129,6 +132,18 @@
     - name: StartMiniKube 
       debug:
         msg: "Minikube Started"  
+    
+    - name: InstallKubectl
+      debug:
+        msg: "Kubectl installed"  
+        
+    - name: ConfigKubectl 
+      debug:
+        msg: "Kubectl configured"  
+        
+    - name: DeployApp 
+      debug:
+        msg: "App Deployed"  
   # Roles: list of roles to be imported into the play
 
 # Three dots indicate the end of a YAML document
