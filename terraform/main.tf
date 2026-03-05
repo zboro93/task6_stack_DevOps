@@ -140,6 +140,9 @@ resource "aws_instance" "app_server" {
   tags = {
     build = "Terraform"
   }
+  root_block_device {
+    volume_size = 20
+  }
 }
 
 output "ubuntu_public_ip" {
