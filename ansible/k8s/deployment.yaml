@@ -16,3 +16,5 @@ spec:
       containers:
         - name: nato
           image: zboromir/nato:v3
+          ports:
+          - containerPort: 80 
