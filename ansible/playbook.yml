@@ -80,6 +80,12 @@
       shell: |
         sudo minikube start --driver=docker --force
       notify: StartMiniKube   
+      
+    - name: Copy k8s manifests to server
+      copy:
+        src: "{{ item }}"
+        dest: "/tmp/k8s/{{ item | basename }}"
+      loop: "{{ lookup('fileglob', 'k8s/*.yaml', wantlist=True) }}"
 
     - name: Deploy NATO app
       kubernetes.core.k8s:
