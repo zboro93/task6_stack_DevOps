@@ -98,10 +98,9 @@
       kubernetes.core.k8s:
         kubeconfig: "/root/.kube/config"
         state: present
-        src: "{{ item }}"
+        src: "/tmp/k8s/{{ item | basename }}"
       loop: "{{ lookup('fileglob', 'k8s/*.yaml', wantlist=True) }}"
-      notify: DeployApp 
-
+      notify: DeployApp
 
       
 #    - name: Start container
