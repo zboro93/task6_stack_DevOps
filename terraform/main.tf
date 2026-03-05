@@ -125,6 +125,14 @@ resource "aws_vpc_security_group_egress_rule" "rule_allow_https_out" {
   to_port           = 443
 }
 
+resource "aws_vpc_security_group_ingress_rule" "rule_allow_http_in" {
+  security_group_id = aws_security_group.sg_allow_required_ports.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 30080
+  ip_protocol       = "tcp"
+  to_port           = 30080
+}
+
 resource "aws_key_pair" "deployer" {
   key_name   = "MyAWSKey"
   public_key = file("${path.module}/.ssh/MyAWSKey.pub")
