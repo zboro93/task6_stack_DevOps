@@ -48,13 +48,12 @@
 
 
     - name: Install Python dependencies for Kubernetes
-      become: yes
       pip:
         name:
           - kubernetes
           - pyyaml
         executable: pip3
-      
+        extra_args: "--break-system-packages"
         
     - name: Install Docker  
       apt:
