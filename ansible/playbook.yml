@@ -102,6 +102,10 @@
       loop: "{{ lookup('fileglob', 'k8s/*.yaml', wantlist=True) }}"
       notify: DeployApp
 
+    - name: Forward-port
+      shell: |
+        sudo minikube kubectl -- port-forward --address 0.0.0.0 service/nato-service 80:80
+        
       
 #    - name: Start container
 #      community.docker.docker_container:
