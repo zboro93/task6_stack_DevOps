@@ -111,7 +111,8 @@
 
     - name: Forward-port
       shell: |
-        nohup sudo minikube kubectl -- port-forward --address 0.0.0.0 service/nato-service 80:80 &
+        nohup sudo minikube kubectl -- port-forward --address 0.0.0.0 service/nato-service 80:80 > /tmp/port-forward.log 2>&1 &
+      become: no
       when: wait_result.rc == 0
             
       
