@@ -105,7 +105,7 @@
     - name: Wait for pod to be running
       shell: >
         sudo minikube kubectl -- wait --for=condition=ready pod
-        -l app=nato-app
+        -l app=nato
         --timeout=120s
       register: wait_result      
 
