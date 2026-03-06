@@ -101,10 +101,18 @@
         src: "/tmp/k8s/{{ item | basename }}"
       loop: "{{ lookup('fileglob', 'k8s/*.yaml', wantlist=True) }}"
       notify: DeployApp
+      
+    - name: Wait for pod to be running
+      shell: >
+        sudo minikube kubectl -- wait --for=condition=ready pod
+        -l app=nato-app
+        --timeout=120s
+      register: wait_result      
 
     - name: Forward-port
       shell: |
         sudo minikube kubectl -- port-forward --address 0.0.0.0 service/nato-service 80:80
+      when: wait_result.rc == 0   
         
       
 #    - name: Start container
